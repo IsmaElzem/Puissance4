@@ -1,5 +1,5 @@
 TESTFORWINNER:
-*Ce programme va vérifier si un joueur a gagné ou non en vérifiant toutes les possibilités, mais si le jeu a commencé depuis moins de 7 tour, pas la pein de vérifier s'il y a des gagnants vue que c'est en core impossible
+*Ce programme va vÃ©rifier si un joueur a gagnÃ© ou non en vÃ©rifiant toutes les possibilitÃ©s, mais si le jeu a commencÃ© depuis moins de 7 tour, pas la pein de vÃ©rifier s'il y a des gagnants vue que c'est en core impossible
     MOVE.L #TAB,A0 * On MOVE l'adresse de TAB dans A0
     CMP.W #6,TOURJOUER
     BLT APPEL2
@@ -8,33 +8,33 @@ TESTFORWINNER:
 BoucleVerticalTestCol:
     MOVE #0,D2 *D2 = Lignes
 BoucleVerticalTestLig:
-*On fait cette partie pour trouver où se trouve l'endroit où le joueur a jouer (ça va nous retourner dans D4 une valeure entre 0 et 41)
+*On fait cette partie pour trouver oÃ¹ se trouve l'endroit oÃ¹ le joueur a jouer (Ã§a va nous retourner dans D4 une valeure entre 0 et 41)
     MOVE.L D1,D3 
     MULU.w #6,D3
     ADD.L D2,D3
     MOVE.B (A0,D3),D4 
 *    
-    TST.B D4 *On compare D4 avec 0 (grâce à TST), car une case vide contient 0 et dans ce cas là ceci nous interesse pas 
+    TST.B D4 *On compare D4 avec 0 (grÃ¢ce Ã  TST), car une case vide contient 0 et dans ce cas lÃ  ceci nous interesse pas 
     BEQ VerticalWinTestEchouer *Si c'est le cas, alors on va dans 'VerticalWinTestEchouer'
     MOVE.B 1(A0,D3),D5 *On regarde la case actuelle +1
-    CMP.B D4,D5 *On compare pour vori si le contenu de celle ci est bien égale à la valeur dans D4
+    CMP.B D4,D5 *On compare pour vori si le contenu de celle ci est bien Ã©gale Ã  la valeur dans D4
     BNE VerticalWinTestEchouer *Si c'est pas le cas, alors on va dans 'VerticalWinTestEchouer'
     MOVE.B 2(A0,D3),D5 *On regarde la case actuelle +2
     CMP.B D4,D5
     BNE VerticalWinTestEchouer
     MOVE.B 3(A0,D3),D5 *On regarde la case actuelle +3
     CMP.B D4,D5
-    BEQ WinFound *Si on arrive jusqu'ici, ça veut donc dire que D4,D4+1,D4+2,D4+3 contiennent tous les 4, 1 ou 2
+    BEQ WinFound *Si on arrive jusqu'ici, Ã§a veut donc dire que D4,D4+1,D4+2,D4+3 contiennent tous les 4, 1 ou 2
 VerticalWinTestEchouer:  
-    ADD #1,D2 *On ajoute '1' à D2, qui correspond aux lignes
-*On regarde si la ligne est égale à 3 (Les lignes vont de 0 à 5, pour qu'un personne gagne verticalement, 
-*il faut que 4 cases soit alignées verticalement. On considére que la 1er case tester est celle tout en haut
+    ADD #1,D2 *On ajoute '1' Ã  D2, qui correspond aux lignes
+*On regarde si la ligne est Ã©gale Ã  3 (Les lignes vont de 0 Ã  5, pour qu'un personne gagne verticalement, 
+*il faut que 4 cases soit alignÃ©es verticalement. On considÃ©re que la 1er case tester est celle tout en haut
 *Donc la 1er case est forcement entre [0,2] pour les lignes, et [0,6] pour les colonnes.
-*Donc on test la 1er case du haut, et on descends vers le bas (avec +1,+2,+3) pour vérifier le contenu des autres cases (cf l'image du tableau en annexe)
+*Donc on test la 1er case du haut, et on descends vers le bas (avec +1,+2,+3) pour vÃ©rifier le contenu des autres cases (cf l'image du tableau en annexe)
     CMP #3,D2 
     BNE BoucleVerticalTestLig
     ADD #1,D1
-    CMP #7,D1 *Si D1 = 7 alors on a finit de vérifier, car la colonne max dans notre tableau est 6
+    CMP #7,D1 *Si D1 = 7 alors on a finit de vÃ©rifier, car la colonne max dans notre tableau est 6
     BNE BoucleVerticalTestCol
 
 *TEST HORIZONTALE
@@ -64,8 +64,8 @@ HorizontaleWinTestEchouer:
     CMP #6,D2
     BNE BoucleHorizontaleTestLig 
     ADD #1,D1
- *Ici, la colonne maximale à regarder est la 3eme, vue qu'on regarde d'abord la 1er case et celle qui suit (vers la droite).
- *Donc si la 1er case est aux coordonnées [4,0], alors il ne peut avoir que 3 '1/2' à la suite
+ *Ici, la colonne maximale Ã  regarder est la 3eme, vue qu'on regarde d'abord la 1er case et celle qui suit (vers la droite).
+ *Donc si la 1er case est aux coordonnÃ©es [4,0], alors il ne peut avoir que 3 '1/2' Ã  la suite
     CMP #4,D1
     BNE BoucleHorizontaleTestCol 
 
@@ -104,7 +104,7 @@ DiagonaleEastWinTestFailed:
 *On regarde les cases qui vont du bas gauche vers le haut droit horizontalement    
     MOVE #0,D1
 BoucleDiagonaleOuestTestCol:
-    MOVE #2,D2 *On fait commencer D2 à 2 pour celui ci  
+    MOVE #2,D2 *On fait commencer D2 Ã  2 pour celui ci  
 BoucleDiagonaleWestTestLig:
     MOVE.L D1,D3
     MULU.w #6,D3
@@ -134,13 +134,8 @@ DiagonaleOuestWinTestEchouer:
 
 
 WinFound:
-        ADD.B #'0',D5 *On fait ceci car 'DRAW_STRING' n'a que des charactéres, on 'réserve' en quelques sortes les pixels où le chiffre du vainqueur va être afficher (cf AffichageMessage, label 'Partie_Gagner')
+        ADD.B #'0',D5 *On fait ceci car 'DRAW_STRING' n'a que des charactÃ©res, on 'rÃ©serve' en quelques sortes les pixels oÃ¹ le chiffre du vainqueur va Ãªtre afficher (cf AffichageMessage, label 'Partie_Gagner')
         MOVE.B D5,Tag_Joueur_Gagner
         MOVE.B #MSG_TYPE_PARTIE_GAGNER,TypeMessageAfficher
         JSR AffichageMessage
-        BRA HandleRestartGame *Lorsqu'un joueur a gagné, on appel le sous programme 'HandleRestartGame' afin de réinitialiser les valeurs de certaines variabls 
-
-*~Font name~Courier New~
-*~Font size~10~
-*~Tab type~1~
-*~Tab size~4~
+        BRA HandleRestartGame *Lorsqu'un joueur a gagnÃ©, on appel le sous programme 'HandleRestartGame' afin de rÃ©initialiser les valeurs de certaines variabls 
