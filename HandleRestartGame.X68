@@ -1,6 +1,6 @@
 HandleRestartGame:
-*Ce petit programme sert ‡ afficher le texte 'Texte_REJOUER' , ‡ des coordonnÈs prÈcis. On demande par la suite d'entrÈ une valeur
-*Si c'est 'y' alors on va au label 'START' sinon c'est la fin du programme (cette partie l‡ est dans le main ligne 113)
+*Ce petit programme sert √† afficher le texte 'Texte_REJOUER' , √† des coordonn√©s pr√©cis. On demande par la suite d'entr√© une valeur
+*Si c'est 'y' alors on va au label 'START' sinon c'est la fin du programme (cette partie l√† est dans le main ligne 113)
         MOVE #120,D1
         MOVE #435,D2
         MOVE #Texte_REJOUER,A1
@@ -8,11 +8,3 @@ HandleRestartGame:
         JSR SAISCAR
         CMP.b #'y',D1
         BEQ START
-
-
-
-
-*~Font name~Courier New~
-*~Font size~10~
-*~Tab type~1~
-*~Tab size~4~
