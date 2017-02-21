@@ -57,11 +57,3 @@ PLAY_SOUND
     MOVE #76,D0
     TRAP #15
     RTS
-
-
-
-
-*~Font name~Courier New~
-*~Font size~10~
-*~Tab type~1~
-*~Tab size~4~
